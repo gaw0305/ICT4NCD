@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_welcome"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/background_dark"
+    tools:context="gwhitmore.ict4ncd.Welcome">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ncdlight"
+        android:id="@+id/imageView4"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="124dp"
+        android:onClick="launchGame"/>
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/mohlight"
+        android:id="@+id/imageView5"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="85dp" />
+
+    <TextView
+        android:text="My Health Tracker App"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="126dp" />
+
+    <TextView
+        android:text="Vanuatu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/textView3"/>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageView5"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="54dp"
+        android:id="@+id/loginSpinner"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:text="New Profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/newProfileTextView"
+        android:onClick="newProfileClicked"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="60dp" />
+
+    <TextView
+        android:text="Delete Profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/deleteProfileTextView"
+        android:onClick="deleteProfileClicked"
+        android:layout_marginTop="22dp"
+        android:layout_alignTop="@+id/newProfileTextView"
+        android:layout_alignRight="@+id/newProfileTextView"
+        android:layout_alignEnd="@+id/newProfileTextView" />
+
+</RelativeLayout>

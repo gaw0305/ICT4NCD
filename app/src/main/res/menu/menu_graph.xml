@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/logout"
+        android:orderInCategory="400"
+        android:title="Log Out" />
+    <item
+        android:id="@+id/language"
+        android:orderInCategory="100"
+        android:title="Language">
+        <menu>
+            <item
+                android:id="@+id/bislama"
+                android:orderInCategory="100"
+                android:title="Bislama"
+                android:drawableRight="@drawable/checkmark" />
+            <item
+                android:id="@+id/english"
+                android:orderInCategory="100"
+                android:title="English" />
+            <item
+                android:id="@+id/french"
+                android:orderInCategory="200"
+                android:title="French" />
+
+        </menu>
+    </item>
+    <item
+        android:id="@+id/export"
+        android:orderInCategory="200"
+        android:title="Export Data" />
+    <item
+        android:id="@+id/settings"
+        android:orderInCategory="300"
+        android:title="Settings" />
+</menu>

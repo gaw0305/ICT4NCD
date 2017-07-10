@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_mode_chooser"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/background_dark"
+    tools:context="gwhitmore.ict4ncd.ModeChooserActivity">
+
+    <TextView
+        android:text="Log Out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/logOutTextView"
+        android:onClick="logoutButtonClicked"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/linearLayout"
+            android:layout_toStartOf="@+id/linearLayout">
+
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/list"
+                android:id="@+id/listButton"
+                android:onClick="listButtonClicked"
+                android:layout_marginBottom="10dp"/>
+
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/stethoscope"
+                android:id="@+id/bloodPressureButton"
+                android:onClick="bloodPressureButtonClicked"
+                android:layout_marginBottom="10dp"/>
+
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/bloodsugar"
+                android:id="@+id/bloodSugarButton"
+                android:onClick="bloodSugarButtonClicked"
+                android:layout_marginBottom="10dp"/>
+
+            <ImageButton
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:background="@drawable/scale"
+                android:id="@+id/weightButton"
+                android:onClick="weightButtonClicked"
+                android:layout_marginBottom="10dp"/>
+
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/graph"
+                android:id="@+id/graphButton"
+                android:onClick="graphButtonClicked" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/logOutTextView"
+            android:layout_toStartOf="@+id/logOutTextView"
+            android:weightSum="10.0">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:text="All Data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                android:id="@+id/textView4"
+                android:onClick="listButtonClicked"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="00dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:text="Blood Pressure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/bloodPressureText"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                android:onClick="bloodPressureButtonClicked"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:text="Blood Sugar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/bloodSugarText"
+                android:onClick="bloodSugarButtonClicked"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:text="Weight/BMI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/weightText"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                android:onClick="weightButtonClicked"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:text="Graphs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView6"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                android:onClick="graphButtonClicked"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
+
+<!--<TextView-->
+<!--android:text="Blood Sugar"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:id="@+id/bloodSugarText"-->
+<!--android:layout_centerVertical="true"-->
+<!--android:layout_toRightOf="@+id/bloodSugarButton"-->
+<!--android:onClick="bloodSugarButtonClicked"-->
+<!--android:textAppearance="@android:style/TextAppearance.Material.Medium" />-->
+
+<!--<ImageButton-->
+<!--android:layout_width="60dp"-->
+<!--android:layout_height="60dp"-->
+<!--android:background="@drawable/bloodsugar"-->
+<!--android:id="@+id/bloodSugarButton"-->
+<!--android:onClick="bloodSugarButtonClicked"-->
+<!--android:layout_centerVertical="true"-->
+<!--android:layout_marginBottom="44dp"-->
+<!--android:layout_marginLeft="90dp"/>-->
+
+<!--<TextView-->
+<!--android:text="Weight/BMI"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:id="@+id/weightText"-->
+<!--android:textAppearance="@android:style/TextAppearance.Material.Medium"-->
+<!--android:layout_alignTop="@+id/weightButton"-->
+<!--android:layout_alignRight="@+id/bloodSugarText"-->
+<!--android:layout_alignEnd="@+id/bloodSugarText"-->
+<!--android:onClick="weightButtonClicked"-->
+<!--android:layout_marginTop="14dp" />-->
+
+<!--<TextView-->
+<!--android:text="Blood Pressure"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:id="@+id/bloodPressureText"-->
+<!--android:textAppearance="@android:style/TextAppearance.Material.Medium"-->
+<!--android:layout_below="@+id/listButton"-->
+<!--android:layout_toRightOf="@+id/bloodPressureButton"-->
+<!--android:layout_toEndOf="@+id/bloodPressureButton"-->
+<!--android:layout_marginTop="17dp"-->
+<!--android:onClick="bloodPressureButtonClicked"/>-->
+
+<!--<TextView-->
+<!--android:text="All Data"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:textAppearance="@android:style/TextAppearance.Material.Medium"-->
+<!--android:id="@+id/textView4"-->
+<!--android:layout_marginBottom="19dp"-->
+<!--android:layout_alignBottom="@+id/listButton"-->
+<!--android:layout_alignLeft="@+id/weightText"-->
+<!--android:layout_alignStart="@+id/weightText"-->
+<!--android:onClick="listButtonClicked"/>-->
+
+<!--<TextView-->
+<!--android:text="Graphs"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:id="@+id/textView6"-->
+<!--android:textAppearance="@android:style/TextAppearance.Material.Medium"-->
+<!--android:layout_alignTop="@+id/graphButton"-->
+<!--android:layout_alignRight="@+id/textView4"-->
+<!--android:layout_alignEnd="@+id/textView4"-->
+<!--android:layout_marginTop="19dp"-->
+<!--android:onClick="graphButtonClicked"/>-->
+
+<!--<ImageButton-->
+<!--android:layout_width="60dp"-->
+<!--android:layout_height="60dp"-->
+<!--android:background="@drawable/stethoscope"-->
+<!--android:id="@+id/bloodPressureButton"-->
+<!--android:onClick="bloodPressureButtonClicked"-->
+<!--android:layout_above="@+id/bloodSugarButton"-->
+<!--android:layout_alignLeft="@+id/bloodSugarButton"-->
+<!--android:layout_alignStart="@+id/bloodSugarButton" />-->
+
+<!--<ImageButton-->
+<!--android:layout_width="55dp"-->
+<!--android:layout_height="55dp"-->
+<!--android:background="@drawable/scale"-->
+<!--android:id="@+id/weightButton"-->
+<!--android:onClick="weightButtonClicked"-->
+<!--android:layout_marginTop="33dp"-->
+<!--android:layout_below="@+id/bloodSugarText"-->
+<!--android:layout_alignLeft="@+id/bloodSugarButton"-->
+<!--android:layout_alignStart="@+id/bloodSugarButton" />-->
+
+<!--<ImageView-->
+<!--android:layout_width="60dp"-->
+<!--android:layout_height="60dp"-->
+<!--app:srcCompat="@drawable/graph"-->
+<!--android:id="@+id/graphButton"-->
+<!--android:onClick="graphButtonClicked"-->
+<!--android:layout_marginTop="17dp"-->
+<!--android:layout_below="@+id/weightButton"-->
+<!--android:layout_alignLeft="@+id/weightButton"-->
+<!--android:layout_alignStart="@+id/weightButton" />-->
+
+<!--<ImageView-->
+<!--android:layout_width="60dp"-->
+<!--android:layout_height="60dp"-->
+<!--android:background="@drawable/list"-->
+<!--android:id="@+id/listButton"-->
+<!--android:onClick="listButtonClicked"-->
+<!--android:layout_above="@+id/bloodPressureButton"-->
+<!--android:layout_alignLeft="@+id/bloodPressureButton"-->
+<!--android:layout_alignStart="@+id/bloodPressureButton"-->
+<!--android:layout_marginBottom="10dp" />-->
+
+<!--<TextView-->
+<!--android:text="Log Out"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:id="@+id/logOutTextView"-->
+<!--android:onClick="logoutButtonClicked"-->
+<!--android:layout_alignParentTop="true"-->
+<!--android:layout_alignParentRight="true"-->
+<!--android:layout_alignParentEnd="true" />-->

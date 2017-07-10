@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/dateTitle"
+        android:layout_alignLeft="@+id/diastolicText"
+        android:layout_alignStart="@+id/diastolicText"
+        android:id="@+id/dateText"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:layout_alignRight="@+id/diastolicText"
+        android:layout_alignEnd="@+id/diastolicText"
+        android:onClick="changeEditDate"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/diastolicText"
+        android:inputType="number"
+        android:layout_below="@+id/diastolicTitle"
+        android:layout_alignLeft="@+id/heartRateText"
+        android:layout_alignStart="@+id/heartRateText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/systolicText"
+        android:inputType="number"
+        android:layout_below="@+id/systolicTitle"
+        android:layout_alignLeft="@+id/heartRateText"
+        android:layout_alignStart="@+id/heartRateText" />
+
+    <TextView
+        android:text="Systolic Blood Pressure:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/systolicTitle"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:layout_below="@+id/heartRateText"
+        android:layout_alignLeft="@+id/systolicText"
+        android:layout_alignStart="@+id/systolicText" />
+
+    <TextView
+        android:text="Diastolic Blood Pressure:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/diastolicTitle"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:layout_below="@+id/systolicText"
+        android:layout_alignLeft="@+id/diastolicText"
+        android:layout_alignStart="@+id/diastolicText" />
+
+    <TextView
+        android:text="Date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dateTitle"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:layout_below="@+id/diastolicText"
+        android:layout_alignLeft="@+id/dateText"
+        android:layout_alignStart="@+id/dateText" />
+
+    <TextView
+        android:text="Heart Rate:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/heartRateTitle"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/heartRateText"
+        android:layout_alignStart="@+id/heartRateText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/heartRateText"
+        android:layout_below="@+id/heartRateTitle"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/updateButton"
+        android:layout_alignRight="@+id/dateText"
+        android:layout_alignEnd="@+id/dateText"
+        android:id="@+id/deleteButton"
+        android:onClick="delete" />
+
+    <Button
+        android:text="Update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/updateButton"
+        android:onClick="update"
+        android:layout_below="@+id/dateText"
+        android:layout_alignLeft="@+id/dateText"
+        android:layout_alignStart="@+id/dateText"
+        android:layout_marginBottom="20dp"/>
+
+
+</RelativeLayout>

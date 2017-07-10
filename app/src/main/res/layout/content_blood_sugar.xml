@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_blood_sugar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/background_dark"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="gwhitmore.ict4ncd.BloodSugarActivity"
+    tools:showIn="@layout/activity_blood_sugar">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/bloodSugarText"
+        android:background="@drawable/border_with_space"
+        android:hint="Blood Sugar"
+        android:layout_alignBottom="@+id/imageView" />
+
+    <Button
+        android:text="Add"
+        android:onClick="addToList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/addButton"
+        android:layout_below="@+id/radioGroup"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="Date"
+        android:onClick="changeDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dateText"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:layout_alignBottom="@+id/addButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <View
+        android:id="@+id/SplitLine"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/addButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/SplitLine"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="17dp"
+        android:background="@drawable/border_no_space"
+        android:id="@+id/bloodSugarListView"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_with_space"
+        android:id="@+id/radioGroup"
+        android:layout_below="@+id/bloodSugarText"
+        android:layout_toRightOf="@+id/dateText"
+        android:layout_toStartOf="@+id/imageView"
+        android:layout_toLeftOf="@+id/imageView">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fastingButton"
+            android:text="Fasting" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/afterMealButton"
+            android:text="After Meal" />
+
+    </RadioGroup>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/ic_menu_info_details"
+        android:id="@+id/imageView"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/bloodSugarText"
+        android:layout_toEndOf="@+id/bloodSugarText" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/ic_menu_info_details"
+        android:id="@+id/imageView2"
+        android:layout_below="@+id/imageView"
+        android:layout_toRightOf="@+id/bloodSugarText"
+        android:layout_toEndOf="@+id/bloodSugarText" />
+
+</RelativeLayout>

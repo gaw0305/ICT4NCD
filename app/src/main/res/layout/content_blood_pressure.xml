@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_heart_window"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/background_dark"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="gwhitmore.ict4ncd.BloodPressureActivity"
+    tools:showIn="@layout/activity_blood_pressure">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/heartRateText"
+        android:background="@drawable/border_with_space"
+        android:hint="Heart Rate (Pulse)"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/heartRateInfo" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:layout_below="@+id/heartRateText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/systolicText"
+        android:background="@drawable/border_with_space"
+        android:hint="Systolic Blood Pressure"
+        android:layout_alignBottom="@+id/systolicInfo" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:layout_below="@+id/systolicText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/diastolicText"
+        android:background="@drawable/border_with_space"
+        android:hint="Diastolic Blood Pressure"
+        android:layout_alignBottom="@+id/diastolicInfo" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/ic_menu_info_details"
+        android:id="@+id/heartRateInfo"
+        android:onClick="heartInfoButtonClicked"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/heartRateText"
+        android:layout_toEndOf="@+id/heartRateText" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/ic_menu_info_details"
+        android:layout_below="@+id/systolicText"
+        android:onClick="diastolicInfoButtonClicked"
+        android:layout_toRightOf="@+id/diastolicText"
+        android:layout_toEndOf="@+id/diastolicText"
+        android:id="@+id/diastolicInfo" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/ic_menu_info_details"
+        android:id="@+id/systolicInfo"
+        android:onClick="systolicInfoButtonClicked"
+        android:layout_below="@+id/heartRateText"
+        android:layout_toRightOf="@+id/heartRateText"
+        android:layout_toEndOf="@+id/heartRateText" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/heartRateListView"
+        android:layout_below="@+id/SplitLine"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/border_no_space"
+        android:layout_marginTop="18dp" />
+
+    <Button
+        android:text="Add"
+        android:onClick="addToList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/addButton"
+        android:layout_below="@+id/diastolicInfo"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="Date"
+        android:onClick="changeDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dateText"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:layout_alignBottom="@+id/addButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <View
+        android:id="@+id/SplitLine"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/addButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
