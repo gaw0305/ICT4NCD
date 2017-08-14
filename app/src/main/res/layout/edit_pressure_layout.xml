@@ -8,7 +8,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
         android:ems="10"
         android:layout_below="@+id/dateTitle"
         android:layout_alignLeft="@+id/diastolicText"
@@ -40,7 +39,7 @@
         android:layout_alignStart="@+id/heartRateText" />
 
     <TextView
-        android:text="Systolic Blood Pressure:"
+        android:text="@string/systolic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/systolicTitle"
@@ -50,7 +49,7 @@
         android:layout_alignStart="@+id/systolicText" />
 
     <TextView
-        android:text="Diastolic Blood Pressure:"
+        android:text="@string/diastolic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/diastolicTitle"
@@ -60,7 +59,7 @@
         android:layout_alignStart="@+id/diastolicText" />
 
     <TextView
-        android:text="Date"
+        android:text="@string/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/dateTitle"
@@ -70,7 +69,7 @@
         android:layout_alignStart="@+id/dateText" />
 
     <TextView
-        android:text="Heart Rate:"
+        android:text="@string/heart_rate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/heartRateTitle"
@@ -89,7 +88,7 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:text="Delete"
+        android:text="@string/delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/updateButton"
@@ -99,7 +98,7 @@
         android:onClick="delete" />
 
     <Button
-        android:text="Update"
+        android:text="@string/update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/updateButton"
@@ -108,6 +107,14 @@
         android:layout_alignLeft="@+id/dateText"
         android:layout_alignStart="@+id/dateText"
         android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTimeText"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:layout_below="@+id/diastolicText"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

@@ -15,7 +15,7 @@
     tools:showIn="@layout/activity_weight">
 
     <TextView
-        android:text="Date"
+        android:text="@string/date"
         android:onClick="changeDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,10 +54,11 @@
         android:layout_toRightOf="@+id/weightText"
         android:layout_toEndOf="@+id/weightText"
         android:layout_marginLeft="36dp"
-        android:layout_marginStart="36dp" />
+        android:layout_marginStart="36dp"
+        android:contentDescription="@string/information" />
 
     <TextView
-        android:text=" kg"
+        android:text="@string/kg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/weightText"
@@ -73,10 +74,11 @@
         android:id="@+id/imageView2"
         android:layout_below="@+id/imageView"
         android:layout_alignLeft="@+id/imageView"
-        android:layout_alignStart="@+id/imageView" />
+        android:layout_alignStart="@+id/imageView"
+        android:contentDescription="@string/information"/>
 
     <TextView
-        android:text=" cm"
+        android:text="@string/cm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/cmTextView"
@@ -87,7 +89,6 @@
         android:layout_toEndOf="@+id/weightText" />
 
     <EditText
-        android:text="180"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/heightText"
@@ -97,7 +98,9 @@
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/imageView"
         android:layout_toStartOf="@+id/imageView"
-        android:layout_above="@+id/textView8" />
+        android:layout_above="@+id/textView8"
+        android:hint="@string/height"
+        android:inputType="numberDecimal" />
 
     <EditText
         android:layout_width="100dp"
@@ -105,7 +108,7 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/weightText"
-        android:hint="Weight"
+        android:hint="@string/weight"
         android:background="@drawable/border_with_space"
         android:layout_below="@+id/imageView"
         android:layout_alignParentLeft="true"
@@ -113,7 +116,7 @@
         android:layout_alignBottom="@+id/imageView2" />
 
     <Button
-        android:text="Add"
+        android:text="@string/add"
         android:onClick="addToList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

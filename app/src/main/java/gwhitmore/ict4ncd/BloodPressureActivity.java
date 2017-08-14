@@ -33,9 +33,11 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 
 public class BloodPressureActivity extends AppCompatActivity {
 
@@ -44,6 +46,7 @@ public class BloodPressureActivity extends AppCompatActivity {
     EditText systolicText;
     EditText diastolicText;
     TextView dateText;
+    TextView timeText;
     ListView heartRateListView;
     ArrayList<Spanned> heartRateList;
     ArrayAdapter<Spanned> adapter;
@@ -73,6 +76,7 @@ public class BloodPressureActivity extends AppCompatActivity {
     EditText editSystolicText;
     EditText editDiastolicText;
     TextView editDateText;
+    TextView editTimeText;
     AlertDialog alertDialog;
     int curPosition;
     String item1;
@@ -96,15 +100,18 @@ public class BloodPressureActivity extends AppCompatActivity {
         systolicText = (EditText) findViewById(R.id.systolicText);
         diastolicText = (EditText) findViewById(R.id.diastolicText);
         dateText = (TextView) findViewById(R.id.dateText);
+//        timeText = (TextView) findViewById(R.id.timeText);
         heartRateListView = (ListView) findViewById(R.id.heartRateListView);
         heartRateInfo = (ImageView) findViewById(R.id.heartRateInfo);
         diastolicInfo = (ImageView) findViewById(R.id.diastolicInfo);
         systolicInfo = (ImageView) findViewById(R.id.systolicInfo);
         months = new ArrayList<>(Arrays.asList("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"));
         myDB = new DBHandler(this);
+
         password = getIntent().getStringExtra("password");
         username = getIntent().getStringExtra("username");
-        language = getIntent().getStringExtra("language");
+//        language = getIntent().getStringExtra("language");
+        language = myDB.getLanguage(username);
 
         this.setTitle("Blood Pressure");
 
@@ -145,6 +152,7 @@ public class BloodPressureActivity extends AppCompatActivity {
                 editSystolicText = (EditText) dialogView.findViewById(R.id.systolicText);
                 editDiastolicText = (EditText) dialogView.findViewById(R.id.diastolicText);
                 editDateText = (TextView) dialogView.findViewById(R.id.dateText);
+//                editTimeText = (TextView) dialogView.findViewById(R.id.editTimeText);
 
                 editHeartRateText.setText(item2);
                 editSystolicText.setText(item3);
@@ -163,6 +171,22 @@ public class BloodPressureActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    public int sortByDate(ArrayList<String> dataList, String dataListItem) {
+        int index = 0;
+        for (int i = 0; i < dataList.size(); i++) {
+            int year1 = Integer.parseInt(dataList.get(i).split("/")[2]);
+            int year2 = Integer.parseInt(dataListItem.split("/")[2]);
+            int month1 = Integer.parseInt(dataList.get(i).split("/")[1]);
+            int month2 = Integer.parseInt(dataListItem.split("/")[1]);
+            int day1 = Integer.parseInt(dataList.get(i).split("/")[0]);
+            int day2 = Integer.parseInt(dataListItem.split("/")[0]);
+            if (year1 < year2) return i;
+            else if (year1 == year2 && month1 < month2) return i;
+            else if (year1 == year2 && month1 == month2 && day1 < day2) return i;
+        }
+        return index;
     }
 
     public void update(View view) {
@@ -311,8 +335,9 @@ public class BloodPressureActivity extends AppCompatActivity {
         else if (id == R.id.bislama) {
             language = "Bislama";
             translatePage(true);
-            String pass = password;
+            // String pass = password;
             myDB.updateUserTable(username, language, password);
+
         }
         else if (id == R.id.english) {
             language = "English";
@@ -348,13 +373,16 @@ public class BloodPressureActivity extends AppCompatActivity {
     public ArrayList<Spanned> getInfoFromDB() {
         ArrayList<Spanned> fromDB = new ArrayList<>();
         Cursor cursor = myDB.getAllPressureData(username);
+        ArrayList<String> dates = new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {
                 heartRateInput = Integer.toString(cursor.getInt(2));
                 diastolicInput = Integer.toString(cursor.getInt(3));
                 systolicInput = Integer.toString(cursor.getInt(4));
                 dateInput = cursor.getString(5);
-                fromDB.add(0, Html.fromHtml(formatInput(heartRateInput, diastolicInput, systolicInput, dateInput)));
+                int index = sortByDate(dates, dateInput);
+                dates.add(index, dateInput);
+                fromDB.add(index, Html.fromHtml(formatInput(heartRateInput, diastolicInput, systolicInput, dateInput)));
             } while (cursor.moveToNext());
         }
 
@@ -489,9 +517,10 @@ public class BloodPressureActivity extends AppCompatActivity {
         month = c.get(Calendar.MONTH);
         day = c.get(Calendar.DAY_OF_MONTH);
 
-        dateText.setText(new StringBuilder()
-                .append(day).append("/").append(month+1)
-                .append("/").append(year));
+        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+        String[] dateTimeString = currentDateTimeString.split(" ");
+        dateText.setText(day + "/" + (month+1) + "/" + year);
+//        timeText.setText(" " + dateTimeString[3].split(":")[0] + ":" + dateTimeString[3].split(":")[1] + dateTimeString[4]);
     }
 
     public void changeDate(View view) {
@@ -610,31 +639,6 @@ public class BloodPressureActivity extends AppCompatActivity {
         return input;
     }
 
-//    private ArrayList<Spanned> readFromFile(Context context, String fileName) {
-//
-//        ArrayList<Spanned> data = new ArrayList<>();
-//
-//        try {
-//            InputStream inputStream = context.openFileInput(fileName);
-//
-//            if (inputStream != null) {
-//                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-//                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-//                String receiveString;
-//
-//                while ((receiveString = bufferedReader.readLine()) != null) {
-//                    data.add(0, Html.fromHtml(receiveString));
-//                }
-//
-//                inputStream.close();
-//            }
-//        } catch (FileNotFoundException e) {
-//        } catch (IOException e) {
-//        }
-//
-//        return data;
-//    }
-
     private void writeToFile(String data, File file) {
         try {
             FileOutputStream out = new FileOutputStream(file, true);
@@ -643,14 +647,6 @@ public class BloodPressureActivity extends AppCompatActivity {
             out.close();
         } catch (IOException e) {}
     }
-
-//    private void writeToFile(String data, Context context, String fileName) {
-//        try {
-//            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(fileName, Context.MODE_APPEND));
-//            outputStreamWriter.append(data + "\n");
-//            outputStreamWriter.close();
-//        } catch (IOException e) {}
-//    }
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {

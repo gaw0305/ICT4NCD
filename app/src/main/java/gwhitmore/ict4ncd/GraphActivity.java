@@ -40,7 +40,7 @@ public class GraphActivity extends AppCompatActivity {
         setContentView(R.layout.activity_graph);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         username = getIntent().getStringExtra("username");
         language = getIntent().getStringExtra("language");
@@ -86,6 +86,44 @@ public class GraphActivity extends AppCompatActivity {
         return true;
     }
 
+    public boolean sortByDate(ArrayList<ArrayList<String>> dataList, ArrayList<String> dataListItem) {
+        boolean previousDate = false;
+        for (int i = 0; i < dataList.size(); i++) {
+            int year1 = Integer.parseInt(dataList.get(i).get(3).split("/")[2]);
+            int year2 = Integer.parseInt(dataListItem.get(3).split("/")[2]);
+            int month1 = Integer.parseInt(dataList.get(i).get(3).split("/")[1]);
+            int month2 = Integer.parseInt(dataListItem.get(3).split("/")[1]);
+            int day1 = Integer.parseInt(dataList.get(i).get(3).split("/")[0]);
+            int day2 = Integer.parseInt(dataListItem.get(3).split("/")[0]);
+            // If the year of the current item in the list is greater than the year of the new data
+            // point, add the new data point before the current item, and set previousDate to true,
+            // so the item is not added twice
+            if (year1 > year2) {
+                dataList.add(i, dataListItem);
+                previousDate = true;
+                break;
+            }
+            // If the year is the same, but the month of the current item in the list is greater than the
+            // month of the new data point, add the new data point before the current item, and set
+            // previousDate to true, so the item is not added twice
+            else if (year1 == year2 && month1 > month2) {
+                dataList.add(i, dataListItem);
+                previousDate = true;
+                break;
+            }
+            // If the year is the same and the month is the same, but the day of the current item in the
+            // list is greater than the day of the new data point, add the new data point before the current
+            // item, and set previousDate to true, so the item is not added twice
+            else if (year1 == year2 && month1 == month2 && day1 > day2) {
+                dataList.add(i, dataListItem);
+                previousDate = true;
+                break;
+            }
+        }
+        // If the item has not already been added, set previousDate to false, and reset the item to be added
+        return previousDate;
+    }
+
     /**
      * Loads the graph initially, then updates it when the user chooses a different data set to be graphed
      *
@@ -115,42 +153,9 @@ public class GraphActivity extends AppCompatActivity {
 
                 // Adds the new data list item to a larger data list with all the information from the database
                 // in the order it should be based on date
-                boolean previousDate = false;
-                for (int i = 0; i < dataList.size(); i++) {
-                    int year1 = Integer.parseInt(dataList.get(i).get(3).split("/")[2]);
-                    int year2 = Integer.parseInt(dataListItem.get(3).split("/")[2]);
-                    int month1 = Integer.parseInt(dataList.get(i).get(3).split("/")[1]);
-                    int month2 = Integer.parseInt(dataListItem.get(3).split("/")[1]);
-                    int day1 = Integer.parseInt(dataList.get(i).get(3).split("/")[0]);
-                    int day2 = Integer.parseInt(dataListItem.get(3).split("/")[0]);
-                    // If the year of the current item in the list is greater than the year of the new data
-                    // point, add the new data point before the current item, and set previousDate to true,
-                    // so the item is not added twice
-                    if (year1 > year2) {
-                        dataList.add(i, dataListItem);
-                        previousDate = true;
-                        break;
-                    }
-                    // If the year is the same, but the month of the current item in the list is greater than the
-                    // month of the new data point, add the new data point before the current item, and set
-                    // previousDate to true, so the item is not added twice
-                    else if (year1 == year2 && month1 > month2) {
-                        dataList.add(i, dataListItem);
-                        previousDate = true;
-                        break;
-                    }
-                    // If the year is the same and the month is the same, but the day of the current item in the
-                    // list is greater than the day of the new data point, add the new data point before the current
-                    // item, and set previousDate to true, so the item is not added twice
-                    else if (year1 == year2 && month1 == month2 && day1 > day2) {
-                        dataList.add(i, dataListItem);
-                        previousDate = true;
-                        break;
-                    }
-                }
-                // If the item has not already been added, set previousDate to false, and reset the item to be added
+                boolean previousDate;
+                previousDate = sortByDate(dataList, dataListItem);
                 if (!previousDate) dataList.add(dataListItem);
-                previousDate = false;
                 dataListItem = new ArrayList<>();
             } while (cursor.moveToNext());
         }
@@ -164,12 +169,11 @@ public class GraphActivity extends AppCompatActivity {
         int dataPointX = 0;
         int minY = yMin;
         int maxY = yMax;
-        int curDay = 0;
+        int curDay;
         int prevDay = 0;
         int curMonth;
         int curYear;
         int prevYear = 0;
-        int prevMonth = 0;
         int baseLineDateNumber = 0;
 
         // For each item in the list, convert the date to a number out of 365 (or 730 if two years of data, and so on)
@@ -229,7 +233,6 @@ public class GraphActivity extends AppCompatActivity {
             }
             prevDay = curDay;
             prevYear = curYear;
-            prevMonth = curMonth;
             dataPointX++;
             index++;
         }

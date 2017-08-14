@@ -22,7 +22,6 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String KEY_USERNAME = "USERNAME";
     private static final String KEY_PASSWORD = "PASSWORD";
     private static final String KEY_LANGUAGE = "LANGUAGE";
-    private static final String KEY_HEIGHT = "HEIGHT";
     private static final String KEY_ID = "ID";
     private static final String KEY_HEARTRATE = "HEART";
     private static final String KEY_DIASTOLIC = "DIASTOLIC";
@@ -31,6 +30,8 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String KEY_SUGAR = "SUGAR";
     private static final String KEY_FOOD = "FOOD";
     private static final String KEY_WEIGHT = "WEIGHT";
+    private static final String KEY_HEIGHT = "HEIGHT";
+
 
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -74,7 +75,7 @@ public class DBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertLoginData(String username, String password, String language) {
+    boolean insertLoginData(String username, String password, String language) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(KEY_USERNAME, username);
@@ -85,7 +86,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean insertPressureData(String username, Integer heartRateData, Integer systolicData, Integer diastolicData, String date) {
+    boolean insertPressureData(String username, Integer heartRateData, Integer systolicData, Integer diastolicData, String date) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(KEY_USERNAME, username);
@@ -98,7 +99,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean insertSugarData(String username, Double sugarData, String food, String date) {
+    boolean insertSugarData(String username, Double sugarData, String food, String date) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(KEY_USERNAME, username);
@@ -110,7 +111,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean insertHeightData(String username, Double heightData, Double weightData, String date) {
+    boolean insertWeightData(String username, Double heightData, Double weightData, String date) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(KEY_USERNAME, username);
@@ -122,68 +123,84 @@ public class DBHandler extends SQLiteOpenHelper {
         return true;
     }
 
-    public Cursor getAllLoginData() {
+    Cursor getAllLoginData() {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * from " + TABLE_LOGIN, null);
-
-        return cursor;
+        return db.rawQuery("SELECT * from " + TABLE_LOGIN, null);
     }
 
-    public void deleteItemPressureTable(Integer idNum) {
+    void deleteItemPressureTable(Integer idNum) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_PRESSURE_DATA + " WHERE " + KEY_ID + "=" + idNum);
     }
 
-    public void deleteItemSugarTable(Integer idNum) {
+    void deleteItemSugarTable(Integer idNum) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_PRESSURE_DATA + " WHERE " + KEY_ID + "=" + idNum);
     }
 
-    public void deleteUserData(String username) {
+    void deleteUserData(String username) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE From " + TABLE_PRESSURE_DATA + " WHERE " + KEY_USERNAME + "='" + username + "'");
         db.execSQL("DELETE FROM " + TABLE_LOGIN + " WHERE " + KEY_USERNAME + "='" + username + "'");
     }
 
-    public void updateUserTable(String username, String language, String password) {
+    void updateUserTable(String username, String language, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE " + TABLE_LOGIN + " SET " + KEY_LANGUAGE + "='" + language + "' WHERE "
                 + KEY_USERNAME + "='" + username + "'");
     }
 
-    public Cursor getAllPressureData(String username) {
+    Cursor getAllPressureData(String username) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * from " + TABLE_PRESSURE_DATA + " WHERE " + KEY_USERNAME
+        return db.rawQuery("SELECT * from " + TABLE_PRESSURE_DATA + " WHERE " + KEY_USERNAME
                 + "='" + username + "'", null);
-        return cursor;
     }
 
-    public int getSinglePressureDataID(String username, String date) {
+    int getSinglePressureDataID(String username, String date) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_PRESSURE_DATA + " WHERE " + KEY_USERNAME
                 + "='" + username + "' and " + KEY_DATE + "='" + date + "'", null);
         cursor.moveToFirst();
-        return cursor.getInt(0);
+        int id = cursor.getInt(0);
+        cursor.close();
+        return id;
     }
 
-    public int getSingleSugarDataID(String username, String date) {
+    int getSingleSugarDataID(String username, String date) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_PRESSURE_DATA + " WHERE " + KEY_USERNAME
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_SUGAR_DATA + " WHERE " + KEY_USERNAME
                 + "='" + username + "' and " + KEY_DATE + "='" + date + "'", null);
         cursor.moveToFirst();
-        return cursor.getInt(0);
+        int id = cursor.getInt(0);
+        cursor.close();
+        return id;
     }
 
-    public Cursor getAllSugarData() {
+    Cursor getSingleDataItemByDate(String username, String date, String table) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * from " + TABLE_SUGAR_DATA, null);
-        return cursor;
+        return db.rawQuery("SELECT * FROM " + table + " WHERE " + KEY_USERNAME
+                + "='" + username + "' and " + KEY_DATE + "='" + date + "'", null);
     }
 
-    public Cursor getAllWeightData() {
+    Cursor getAllSugarData(String username) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * from " + TABLE_WEIGHT_DATA, null);
-        return cursor;
+        return db.rawQuery("SELECT * from " + TABLE_SUGAR_DATA, null);
+    }
+
+    Cursor getAllWeightData(String username) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT * from " + TABLE_WEIGHT_DATA + " WHERE " + KEY_USERNAME
+                + "='" + username + "'", null);
+    }
+
+    String getLanguage(String username) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_LOGIN + " WHERE " + KEY_USERNAME
+                + "='" + username + "'", null);
+        cursor.moveToFirst();
+        String language = cursor.getString(2);
+        cursor.close();
+        return language;
     }
 
 //    public Cursor getDataByID(int id) {
@@ -195,11 +212,11 @@ public class DBHandler extends SQLiteOpenHelper {
 //        return cursor;
 //    }
 
-    public String getTableAsString() {
+    String getTableAsString() {
         Log.d("something", "getTableAsString called");
         SQLiteDatabase db = this.getWritableDatabase();
-        String tableString = String.format("Table %s:\n", TABLE_PRESSURE_DATA);
-        Cursor allRows  = db.rawQuery("SELECT * FROM " + TABLE_PRESSURE_DATA, null);
+        String tableString = String.format("Table %s:\n", TABLE_WEIGHT_DATA);
+        Cursor allRows  = db.rawQuery("SELECT * FROM " + TABLE_WEIGHT_DATA, null);
         if (allRows.moveToFirst() ){
             String[] columnNames = allRows.getColumnNames();
             do {
@@ -211,7 +228,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
             } while (allRows.moveToNext());
         }
-
+        allRows.close();
         return tableString;
     }
 

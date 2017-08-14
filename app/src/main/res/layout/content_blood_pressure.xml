@@ -21,7 +21,7 @@
         android:ems="10"
         android:id="@+id/heartRateText"
         android:background="@drawable/border_with_space"
-        android:hint="Heart Rate (Pulse)"
+        android:hint="@string/heart_rate_title"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -37,7 +37,7 @@
         android:layout_alignParentStart="true"
         android:id="@+id/systolicText"
         android:background="@drawable/border_with_space"
-        android:hint="Systolic Blood Pressure"
+        android:hint="@string/systolic_title"
         android:layout_alignBottom="@+id/systolicInfo" />
 
     <EditText
@@ -50,7 +50,7 @@
         android:layout_alignParentStart="true"
         android:id="@+id/diastolicText"
         android:background="@drawable/border_with_space"
-        android:hint="Diastolic Blood Pressure"
+        android:hint="@string/diastolic_title"
         android:layout_alignBottom="@+id/diastolicInfo" />
 
     <ImageView
@@ -61,7 +61,8 @@
         android:onClick="heartInfoButtonClicked"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/heartRateText"
-        android:layout_toEndOf="@+id/heartRateText" />
+        android:layout_toEndOf="@+id/heartRateText"
+        android:contentDescription="@string/information"/>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -71,7 +72,8 @@
         android:onClick="diastolicInfoButtonClicked"
         android:layout_toRightOf="@+id/diastolicText"
         android:layout_toEndOf="@+id/diastolicText"
-        android:id="@+id/diastolicInfo" />
+        android:id="@+id/diastolicInfo"
+        android:contentDescription="@string/information"/>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -81,7 +83,8 @@
         android:onClick="systolicInfoButtonClicked"
         android:layout_below="@+id/heartRateText"
         android:layout_toRightOf="@+id/heartRateText"
-        android:layout_toEndOf="@+id/heartRateText" />
+        android:layout_toEndOf="@+id/heartRateText"
+        android:contentDescription="@string/information"/>
 
     <ListView
         android:layout_width="match_parent"
@@ -94,7 +97,7 @@
         android:layout_marginTop="18dp" />
 
     <Button
-        android:text="Add"
+        android:text="@string/add"
         android:onClick="addToList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -104,7 +107,7 @@
         android:layout_alignParentEnd="true" />
 
     <TextView
-        android:text="Date"
+        android:text="@string/date"
         android:onClick="changeDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -123,5 +126,15 @@
         android:layout_below="@+id/addButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:onClick="changeTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timeText"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:layout_above="@+id/SplitLine"
+        android:layout_toRightOf="@+id/dateText"
+        android:layout_toEndOf="@+id/dateText" />
 
 </RelativeLayout>

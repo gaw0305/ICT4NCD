@@ -6,7 +6,7 @@
     android:gravity="center_vertical">
 
     <TextView
-        android:text="Blood Sugar:"
+        android:text="@string/blood_sugar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/bloodSugarTitle"
@@ -18,7 +18,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/bloodSugarText"
         android:layout_below="@+id/bloodSugarTitle"
@@ -40,18 +40,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/fastingButton"
-            android:text="Fasting" />
+            android:text="@string/fasting" />
 
             <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/afterMealButton"
-            android:text="After Meal" />
+            android:text="@string/after_meal" />
 
     </RadioGroup>
 
     <TextView
-        android:text="Date"
+        android:text="@string/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/dateTitle"
@@ -63,7 +63,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
         android:ems="10"
         android:layout_below="@+id/dateTitle"
         android:layout_alignLeft="@+id/radioGroup"
@@ -75,7 +74,7 @@
         android:onClick="changeEditDate"/>
 
     <Button
-        android:text="Delete"
+        android:text="@string/delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/updateButton"
@@ -85,7 +84,7 @@
         android:onClick="delete" />
 
     <Button
-        android:text="Update"
+        android:text="@string/update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/updateButton"

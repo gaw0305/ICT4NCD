@@ -49,6 +49,12 @@ public class WeightActivity extends AppCompatActivity {
     String item4;
     ArrayList<Spanned> weightList;
     ArrayAdapter<Spanned> adapter;
+    EditText weightText;
+    EditText heightText;
+    DBHandler myDB;
+    String dateInput;
+    String weightInput;
+    String heightInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,14 +62,17 @@ public class WeightActivity extends AppCompatActivity {
         setContentView(R.layout.activity_weight);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         username = getIntent().getStringExtra("username");
         language = getIntent().getStringExtra("language");
         password = getIntent().getStringExtra("password");
 
+        myDB = new DBHandler(WeightActivity.this);
+
         dateText = (TextView) findViewById(R.id.dateText);
+        weightText = (EditText) findViewById(R.id.weightText);
+        heightText = (EditText) findViewById(R.id.heightText);
         weightListView = (ListView) findViewById(R.id.weightListView);
 
         weightList = getInfoFromDB();
@@ -128,21 +137,36 @@ public class WeightActivity extends AppCompatActivity {
         });
     }
 
+    public int sortByDate(ArrayList<String> dataList, String dataListItem) {
+        int index = 0;
+        for (int i = 0; i < dataList.size(); i++) {
+            int year1 = Integer.parseInt(dataList.get(i).split("/")[2]);
+            int year2 = Integer.parseInt(dataListItem.split("/")[2]);
+            int month1 = Integer.parseInt(dataList.get(i).split("/")[1]);
+            int month2 = Integer.parseInt(dataListItem.split("/")[1]);
+            int day1 = Integer.parseInt(dataList.get(i).split("/")[0]);
+            int day2 = Integer.parseInt(dataListItem.split("/")[0]);
+            if (year1 < year2) return i;
+            else if (year1 == year2 && month1 < month2) return i;
+            else if (year1 == year2 && month1 == month2 && day1 < day2) return i;
+        }
+        return index;
+    }
+
     public ArrayList<Spanned> getInfoFromDB() {
         ArrayList<Spanned> fromDB = new ArrayList<>();
-        DBHandler myDB = new DBHandler(WeightActivity.this);
-        Cursor cursor = myDB.getAllWeightData();
+        Cursor cursor = myDB.getAllWeightData(username);
+        ArrayList<String> dates = new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {
-                if (cursor.getString(0).equals(username)) {
-                    String heightInput = Double.toString(cursor.getDouble(1));
-                    String weightInput = Double.toString(cursor.getDouble(2));
-                    String dateInput = cursor.getString(3);
-                    fromDB.add(0, Html.fromHtml(formatInput(heightInput, weightInput, dateInput)));
-                }
+                heightInput = Double.toString(cursor.getDouble(2));
+                weightInput = Double.toString(cursor.getDouble(3));
+                dateInput = cursor.getString(4);
+                int index = sortByDate(dates, dateInput);
+                dates.add(index, dateInput);
+                fromDB.add(index, Html.fromHtml(formatInput(heightInput, weightInput, dateInput)));
             } while (cursor.moveToNext());
         }
-
         return fromDB;
     }
 
@@ -170,20 +194,22 @@ public class WeightActivity extends AppCompatActivity {
     public void changeEditDate(View view) { showDialog(EDIT_DATE_DIALOG); }
 
     public void addToList(View view) {
-        String dateInput = day + "/" + month + "/" + year;
-        String weightInput = ((EditText) findViewById(R.id.weightText)).getText().toString();
-        String heightInput = ((EditText) findViewById(R.id.heightText)).getText().toString();
+        dateInput = day + "/" + (month+1) + "/" + year;
+        weightInput = weightText.getText().toString();
+        heightInput = heightText.getText().toString();
 
         if (dateInput == null || weightInput == null || heightInput == null)
             Toast.makeText(getApplicationContext(), "Please fill all boxes", Toast.LENGTH_LONG).show();
         else {
             String formattedInput = formatInput(heightInput, weightInput, dateInput);
-            DBHandler myDB = new DBHandler(WeightActivity.this);
-            myDB.insertHeightData(username, Double.parseDouble(heightInput), Double.parseDouble(weightInput), dateInput);
+            myDB.insertWeightData(username, Double.parseDouble(heightInput), Double.parseDouble(weightInput), dateInput);
+            weightList.add(0, Html.fromHtml(myDB.getTableAsString()));
+            adapter.notifyDataSetChanged();
             weightList.add(0, Html.fromHtml(formattedInput));
             adapter.notifyDataSetChanged();
 
-            ((EditText) findViewById(R.id.weightText)).setText("");
+            weightText.setText("");
+            heightText.setText("");
         }
 
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
